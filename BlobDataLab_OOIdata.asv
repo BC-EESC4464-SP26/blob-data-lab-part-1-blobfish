@@ -1,33 +1,33 @@
 %% 1. Explore and extract data from one year of OOI mooring data
 %filepath(Users/celiam-b/Desktop/Grad School/Y1/Data Visualization/Module 3)
-filenames = ["deployment0001_GP03FLMB.nc";"deployment0003_GP03FLMB.nc";"deployment0004_GP03FLMB.nc";"deployment0005_GP03FLMB.nc";"deployment0006_GP03FLMB.nc"]
+filenames = ['deployment0001]
+filename1 = 'deployment0001_GP03FLMB.nc';
 
 %1a. Use the function "ncdisp" to display information about the data contained in this file
-for i = 1:length(filenames)
-ncdisp(filenames(i));
+ncdisp(filename)
 
 %1b. Use the function "ncreadatt" to extract the latitude and longitude
 %attributes of this dataset
-lat = ncreadatt(filenames(i), "/", "lat");
-lon = ncreadatt(filenames(i), "/", "lon");
+lat = ncreadatt(filename, "/", "lat")
+lon = ncreadatt(filename, "/", "lon")
 
 %1c. Use the function "ncread" to extract the variables "time" and
 %"ctdmo_seawater_temperature"
-time = ncread(filenames(i), "time");
-temp = ncread(filenames(i), "ctdmo_seawater_temperature");
+time = ncread(filename, "time");
+temp = ncread(filename, "ctdmo_seawater_temperature");
 
 % Extension option: Also extract the variable "pressure" (which, due to the
 % increasing pressure underwater, tells us about depth - 1 dbar ~ 1 m
 % depth). How deep in the water column was this sensor deployed?
 
-% 2. Converting the timestamp from the raw data to a format you can use
+%% 2. Converting the timestamp from the raw data to a format you can use
 % Use the datenum function to convert the "time" variable you extracted
 % into a MATLAB numerical timestamp (Hint: you will need to check the units
 % of time from the netCDF file.)
 time_days = time / 86400;
 time0 = datenum("1900-01-01 00:00:00") 
-time_final = time0 + time_days;
-Datestring = datestr(time_final);
+time_final = time0 + time_days
+Datestring = datestr(time_final)
 
 
 % Checking your work: Use the "datestr" function to check that your
@@ -48,7 +48,6 @@ Datestring = datestr(time_final);
 % Hint: Use the function "datetick" to make the time show up as
 % human-readable dates rather than the MATLAB timestamp numbers
 
-figure(i);
 subplot(2,1,1);
 plot(time_final, temp, ".")
 datetick("x", 22)
@@ -103,10 +102,7 @@ cleaned_movestd(clean_index) = movestd(clean_index);
 %plotted set of points (i.e. in a new color) along with the other data you
 %had already plotted.
 plot(time_final, cleaned_movestd, "r.")
-hold off;
- 
-% 7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
+%% 7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
 % You could do this by writing a for-loop or a function to adapt the code
 % you wrote above to something you can apply across all 5 netCDF files
 % (note that deployment 002 is missing)
-end
