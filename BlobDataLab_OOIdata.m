@@ -1,4 +1,10 @@
+
 %u% 1. Explore and extract data from one year of OOI mooring data
+
+clear;
+
+%% 1. Explore and extract data from one year of OOI mooring data
+
 %filepath(Users/celiam-b/Desktop/Grad School/Y1/Data Visualization/Module 3)
 filenames = ["deployment0001_GP03FLMB.nc";"deployment0003_GP03FLMB.nc";"deployment0004_GP03FLMB.nc";"deployment0005_GP03FLMB.nc";"deployment0006_GP03FLMB.nc"];
 full_times = [];
@@ -20,9 +26,14 @@ time = ncread(filenames(i), "time");
 temp = ncread(filenames(i), "ctdmo_seawater_temperature");
 full_temps = [full_temps;temp];
 
+
 % Extension option: Also extract the variable "pressure" (which, due to the
 % increasing pressure underwater, tells us about depth - 1 dbar ~ 1 m
 % depth). How deep in the water column was this sensor deployed?
+pressure = ncread(filenames(i), "ctdmo_seawater_pressure");
+maxDepth = max(pressure);
+averagePressure = mean(pressure);
+%Deepest was 144.8427 meters, the average depth was 29.4607 meters
 
 % 2. Converting the timestamp from the raw data to a format you can use
 % Use the datenum function to convert the "time" variable you extracted
