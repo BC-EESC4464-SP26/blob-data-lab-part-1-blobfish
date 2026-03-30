@@ -70,6 +70,7 @@ movestd = movstd(temp, 96);
 %5a. A plot of the 1-day moving mean on the same plot as the original raw data
 plot(time_final, movemean, "r-")
 hold on;
+savefig('OOI_Temp_Time.fig'); 
 %5b. A plot of the 1-day moving standard deviation, on a separate plot
 %underneath, but with the same x-axis (hint: you can put two plots in the
 %same figure by using "subplot" and you can specify
@@ -105,6 +106,7 @@ cleaned_movestd(clean_index) = movestd(clean_index);
 %had already plotted.
 plot(time_final, cleaned_movestd, "r.")
 hold on;
+savefig('OOI_STDEV_Temp_Time.fig'); 
 % 7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
 % You could do this by writing a for-loop or a function to adapt the code
 % you wrote above to something you can apply across all 5 netCDF files
