@@ -1,6 +1,9 @@
 %u% 1. Explore and extract data from one year of OOI mooring data
 %filepath(Users/celiam-b/Desktop/Grad School/Y1/Data Visualization/Module 3)
-filenames = ["deployment0001_GP03FLMB.nc";"deployment0003_GP03FLMB.nc";"deployment0004_GP03FLMB.nc";"deployment0005_GP03FLMB.nc";"deployment0006_GP03FLMB.nc"]
+filenames = ["deployment0001_GP03FLMB.nc";"deployment0003_GP03FLMB.nc";"deployment0004_GP03FLMB.nc";"deployment0005_GP03FLMB.nc";"deployment0006_GP03FLMB.nc"];
+full_times = [];
+full_temps = [];
+
 
 %1a. Use the function "ncdisp" to display information about the data contained in this file
 for i = 1:length(filenames)
@@ -15,6 +18,7 @@ lon = ncreadatt(filenames(i), "/", "lon");
 %"ctdmo_seawater_temperature"
 time = ncread(filenames(i), "time");
 temp = ncread(filenames(i), "ctdmo_seawater_temperature");
+full_temps = [full_temps;temp];
 
 % Extension option: Also extract the variable "pressure" (which, due to the
 % increasing pressure underwater, tells us about depth - 1 dbar ~ 1 m
@@ -28,6 +32,7 @@ time_days = time / 86400;
 time0 = datenum("1900-01-01 00:00:00") ;
 time_final = time0 + time_days;
 Datestring = datestr(time_final);
+full_times = [full_times;time_final];
 
 
 % Checking your work: Use the "datestr" function to check that your
