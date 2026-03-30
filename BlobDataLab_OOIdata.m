@@ -5,7 +5,7 @@ filenames = ["deployment0001_GP03FLMB.nc";"deployment0003_GP03FLMB.nc";"deployme
 %1a. Use the function "ncdisp" to display information about the data contained in this file
 for i = 1:length(filenames)
 ncdisp(filenames(i));
-
+%%
 %1b. Use the function "ncreadatt" to extract the latitude and longitude
 %attributes of this dataset
 lat = ncreadatt(filenames(i), "/", "lat");
@@ -25,7 +25,7 @@ temp = ncread(filenames(i), "ctdmo_seawater_temperature");
 % into a MATLAB numerical timestamp (Hint: you will need to check the units
 % of time from the netCDF file.)
 time_days = time / 86400;
-time0 = datenum("1900-01-01 00:00:00") 
+time0 = datenum("1900-01-01 00:00:00") ;
 time_final = time0 + time_days;
 Datestring = datestr(time_final);
 
@@ -59,11 +59,11 @@ hold on;
 % measurements that you calculated in 2b to determine the correct window
 % size to use in the calculation.
 
-movemean = movmean(temp, 96)
+movemean = movmean(temp, 96);
 
 % 4b. Use the movstd function to calculate the 1-day moving standard
 % deviation of the data.
-movestd = movstd(temp, 96)
+movestd = movstd(temp, 96);
 
 % 5. Honing your initial investigation plot
 % Building on the initial plot you made in #3 above, now add:
@@ -80,8 +80,8 @@ hold on;
 % Based on the plot above, you can see that there are time periods when the
 % data are highly variable - these are time periods when the raw data won't
 % be suitable for use to use in studying the Blob.
-max_std = max(movestd)
-min_std = min(movestd)
+max_std = max(movestd);
+min_std = min(movestd);
 %6a. Based on your inspection of the data, select a cutoff value for the
 %1-day moving standard deviation beyond which you will exclude the data
 %from your analysis. Note that you will need to justify this choice in the
@@ -110,3 +110,5 @@ hold off;
 % you wrote above to something you can apply across all 5 netCDF files
 % (note that deployment 002 is missing)
 end
+
+
