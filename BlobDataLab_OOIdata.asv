@@ -48,11 +48,12 @@ Datestring = datestr(time_final);
 % Hint: Use the function "datetick" to make the time show up as
 % human-readable dates rather than the MATLAB timestamp numbers
 
-figure(i);
+figure(1);
 subplot(2,1,1);
 plot(time_final, temp, ".")
 datetick("x", 22)
-hold on;
+
+
 % 4. Dealing with data variability: smoothing and choosing a variability cutoff
 % 4a. Use the movmean function to calculate a 1-day (24 hour) moving mean
 % to smooth the data. Hint: you will need to use the time period between
@@ -75,7 +76,8 @@ plot(time_final, movemean, "r-")
 subplot(2,1,2);
 plot(time_final, movestd, "b.")
 datetick("x", 22)
-hold on;
+
+
 % 6. Identifying data to exclude from analysis
 % Based on the plot above, you can see that there are time periods when the
 % data are highly variable - these are time periods when the raw data won't
@@ -103,8 +105,8 @@ cleaned_movestd(clean_index) = movestd(clean_index);
 %plotted set of points (i.e. in a new color) along with the other data you
 %had already plotted.
 plot(time_final, cleaned_movestd, "r.")
-hold off;
- 
+
+ hold on;
 % 7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
 % You could do this by writing a for-loop or a function to adapt the code
 % you wrote above to something you can apply across all 5 netCDF files
@@ -112,11 +114,3 @@ hold off;
 end
 
 
-%% Downloaded Data 
-filename = "jplMURSST41anommday_c13d_98d6_5caa.nc"
-ncdisp(filename);
-
-lat = ncread(filename, "Latitude");
-lon = ncread(filename, "Longitude");
-
-%imagesc(filename)

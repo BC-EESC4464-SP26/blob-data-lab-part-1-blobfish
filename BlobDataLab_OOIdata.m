@@ -1,11 +1,11 @@
-%% 1. Explore and extract data from one year of OOI mooring data
+%u% 1. Explore and extract data from one year of OOI mooring data
 %filepath(Users/celiam-b/Desktop/Grad School/Y1/Data Visualization/Module 3)
 filenames = ["deployment0001_GP03FLMB.nc";"deployment0003_GP03FLMB.nc";"deployment0004_GP03FLMB.nc";"deployment0005_GP03FLMB.nc";"deployment0006_GP03FLMB.nc"]
 
 %1a. Use the function "ncdisp" to display information about the data contained in this file
 for i = 1:length(filenames)
 ncdisp(filenames(i));
-%%
+
 %1b. Use the function "ncreadatt" to extract the latitude and longitude
 %attributes of this dataset
 lat = ncreadatt(filenames(i), "/", "lat");
@@ -48,10 +48,10 @@ Datestring = datestr(time_final);
 % Hint: Use the function "datetick" to make the time show up as
 % human-readable dates rather than the MATLAB timestamp numbers
 
-figure(i);
-subplot(2,1,1);
-plot(time_final, temp, ".")
+figure(1);
+plot(time_final, temp, "k.")
 datetick("x", 22)
+
 hold on;
 % 4. Dealing with data variability: smoothing and choosing a variability cutoff
 % 4a. Use the movmean function to calculate a 1-day (24 hour) moving mean
@@ -69,10 +69,11 @@ movestd = movstd(temp, 96);
 % Building on the initial plot you made in #3 above, now add:
 %5a. A plot of the 1-day moving mean on the same plot as the original raw data
 plot(time_final, movemean, "r-")
+hold on;
 %5b. A plot of the 1-day moving standard deviation, on a separate plot
 %underneath, but with the same x-axis (hint: you can put two plots in the
 %same figure by using "subplot" and you can specify
-subplot(2,1,2);
+figure (2);
 plot(time_final, movestd, "b.")
 datetick("x", 22)
 hold on;
@@ -103,8 +104,7 @@ cleaned_movestd(clean_index) = movestd(clean_index);
 %plotted set of points (i.e. in a new color) along with the other data you
 %had already plotted.
 plot(time_final, cleaned_movestd, "r.")
-hold off;
- 
+hold on;
 % 7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
 % You could do this by writing a for-loop or a function to adapt the code
 % you wrote above to something you can apply across all 5 netCDF files
